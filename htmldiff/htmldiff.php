@@ -33,26 +33,6 @@ class Model_Helper_Diff{
 		
 		for($i = 1; $i < $m; $i++){
 			for($j = 1; $j < $n; $j++){
-				/*if($s1[$i-1] == $s2[$j-1]){
-					if((($i - 1) == 0) || (($j - 1) == 0)){
-						$num[$i][$j] = 1;
-					}else{
-						$num[$i][$j] = 1 + $num[$i-1][$j-1];
-					}
-
-					//$num[$i][$j] = $num[$i-1][$j-1] + 1;
-				}else{
-					if((($i - 1) == 0) && (($j - 1) == 0)){
-						$num[$i][$j] = 0;
-					}else if((($i - 1) == 0) && !(($j - 1) == 0)){   //First ith element
-						$num[$i][$j] = max(0, $num[$i][$j - 1]);
-					}else if (!(($i - 1) == 0) && (($j - 1) == 0)){  //First jth element
-						$num[$i][$j] = max($num[$i - 1][$j], 0);
-					}else{ // if (!(i == 0) && !(j == 0))
-						$num[$i][$j] = max($num[$i - 1][$j], $num[$i][$j - 1]);
-					}
-					//$num[$i][$j] = max($num[$i][$j-1], $num[$i-1][$j]);
-				}*/
 				if($s1[$i - 1] == $s2[$j - 1]){
 					$num[$i][$j] = $num[$i-1][$j-1] + 1;
 				}else{
@@ -184,10 +164,7 @@ class Model_Helper_Diff{
 			}
 		}//end of for
 		
-		/*while($element = each($out)){
-			$this->logger->debug("Comments:editComment() out : " . $element['key'] . " " . $element['value']);
-		}*/
-		
+
 		if($curChar != ''){
 			//assert $status==0
 			//assert $status==1
