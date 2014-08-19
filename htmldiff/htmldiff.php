@@ -76,7 +76,6 @@ class Model_Helper_Diff{
 			if($status == 0){              // collecting general chars, no space
 				if($htmlStr[$i] == '<'){             // tag started
 					if($curChar != ''){        // output the previous non-empty item
-						//spc.append($curWhiteSpace)
 						array_push($out, $curChar);
 					}
 					$curChar = $htmlStr[$i];              // the <
@@ -84,16 +83,12 @@ class Model_Helper_Diff{
 					$status = 1;           // switch to the tag collection status
 				}else if(!(strrpos($punct, $htmlStr[$i]) === false)){           // punctuation started (often a single char)
 					if($curChar != ''){        // output the previous non-empty item
-						//spc.append($curWhiteSpace)
 						array_push($out, $curChar);
 					}
-					//spc.append($curWhiteSpace)
 					array_push($out, $htmlStr[$i]);        // output the punctuation char
-					//assert $curWhiteSpace == ''
 					$curChar = '';
 				}else if(!(strrpos($whiteSpace, $htmlStr[$i]) === false)){            // space ended the previous item
 					if($curChar != ''){        // output the previous non-empty item
-						//spc.append($curWhiteSpace)
 						array_push($out, $curChar);
 					}
 					$curWhiteSpace = $htmlStr[$i];               // white space of the kind
@@ -107,7 +102,6 @@ class Model_Helper_Diff{
 
 			}else if($status == 1){     // tag without preceeding space
 				if($htmlStr[$i] == '>'){             // tag closed
-					//spc.append($curWhiteSpace)
 					array_push($out, ($curChar . $htmlStr[$i]));
 					$curWhiteSpace = '';
 					$curChar = '';
@@ -120,16 +114,13 @@ class Model_Helper_Diff{
 			}else if($status == 2){     // after first space
 				if($htmlStr[$i] == '<'){             // tag started
 					if($curChar != ''){
-						//spc.append($curWhiteSpace)
 						array_push($out, $curChar);
 					}
 					$curChar = $htmlStr[$i];
 					$status = 3;           // tag after space collection mode
 
 				}else if(!(strrpos($punct, $htmlStr[$i]) === false)){    // punctuation after space
-					//spc.append($curWhiteSpace)
 					array_push($out, $curChar);      // output even the empty, but space
-					//spc.append('')
 					array_push($out, $htmlStr[$i]);        // output the punctuation char, no space
 					$curWhiteSpace = '';
 					$curChar = '';
@@ -138,7 +129,6 @@ class Model_Helper_Diff{
 				}else if(!(strrpos($whiteSpace, $htmlStr[$i]) === false)){            // space ended the previous item
 					if($curChar != ''){
 						// output the previous non-empty item
-						//spc.append($curWhiteSpace)
 						array_push($out, $curChar);
 					}
 					$curWhiteSpace = $htmlStr[$i];               // white space of the kind
@@ -151,7 +141,6 @@ class Model_Helper_Diff{
 
 			}else if($status == 3){     // tag after preceeding space
 				if($htmlStr[$i] == '>'){             // tag closed
-					//spc.append($curWhiteSpace)
 					array_push($out,$curChar .$htmlStr[$i]);
 					$curWhiteSpace = '';
 					$curChar = '';
@@ -160,15 +149,12 @@ class Model_Helper_Diff{
 					$curChar .= $htmlStr[$i];             // collect the tag
 				}
 			}else{
-				//assert False             // unimplemented status
+				// unimplemented status
 			}
 		}//end of for
 		
 
 		if($curChar != ''){
-			//assert $status==0
-			//assert $status==1
-			//spc.append($curWhiteSpace)
 			array_push($out, $curChar);
 		}
 		return $out;
